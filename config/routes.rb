@@ -1,4 +1,6 @@
 Etail::Application.routes.draw do
+  post "/orders/#{ENV['CONFIRM_ORDER_TOKEN']}" => 'orders#confirm', as: :confirm_order
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

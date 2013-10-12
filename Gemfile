@@ -43,3 +43,14 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+group :development, :test do
+  gem 'rspec-rails', '~> 2.0'
+end
+
+group :test do
+  gem "shoulda-matchers"
+  gem 'cucumber-rails', :require => false
+  gem "database_cleaner", '1.0.0.RC1'
+  gem 'machinist', '>= 2.0.0.beta2'
+end

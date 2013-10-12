@@ -7,7 +7,3 @@ Feature: confirm an order
     Given there is an order
     When I confirm this order
     Then this order should be confirmed
-  
-  Scenario: when the order does not exists
-
-  Scenario: when the order have an error

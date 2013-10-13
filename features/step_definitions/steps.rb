@@ -3,11 +3,11 @@ Given(/^there is an order$/) do
 end
 
 When(/^I confirm this order$/) do
-  post confirm_order_path, uid: @order.uid
+  post confirm_order_path, {uid: @order.uid}.to_json
 end
 
 When(/^I create an order uid "(.*?)"$/) do |arg1|
-  post create_order_path, order: {uid: arg1, subtotal: 100.0}
+  post create_order_path, {order: {uid: arg1, subtotal: 100.0}}.to_json
 end
 
 Then(/^this order should be confirmed$/) do

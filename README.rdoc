@@ -1,5 +1,6 @@
-{<img src="https://codeclimate.com/github/nicolasiensen/etail.png" />}[https://codeclimate.com/github/nicolasiensen/etail]
+{<img src="https://travis-ci.org/nicolasiensen/etail.png?branch=master" alt="Build Status" />}[https://travis-ci.org/nicolasiensen/etail]
 {<img src="https://coveralls.io/repos/nicolasiensen/etail/badge.png" alt="Coverage Status" />}[https://coveralls.io/r/nicolasiensen/etail]
+{<img src="https://codeclimate.com/github/nicolasiensen/etail.png" />}[https://codeclimate.com/github/nicolasiensen/etail]
 
 == README
 

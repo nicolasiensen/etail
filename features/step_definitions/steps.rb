@@ -2,12 +2,16 @@ Given(/^there is an order$/) do
   @order = Order.make!
 end
 
+Given(/^there is a store$/) do
+  @store = Store.make!
+end
+
 When(/^I confirm this order$/) do
   post confirm_order_path, {uid: @order.uid}.to_json
 end
 
-When(/^I create an order uid "(.*?)"$/) do |arg1|
-  post create_order_path, {order: {uid: arg1, subtotal: 100.0}}.to_json
+When(/^I create an order uid "(.*?)" for this store$/) do |arg1|
+  @order = Order.make! uid: arg1, store: @store
 end
 
 Then(/^this order should be confirmed$/) do

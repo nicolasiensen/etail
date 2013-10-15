@@ -10,6 +10,8 @@ class OrdersController < ApplicationController
 
   def create
     params = JSON.parse(request.body.read)
+    params["order"]["uid"] = params["order"]["id"]
+    params["order"]["store_id"] = Store.find_by_uid(params["order"]["store_id"]).id
     Order.create(params["order"])
     render status: :ok, nothing: true
   end

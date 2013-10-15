@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Order do
   it { should validate_presence_of :subtotal }
   it { should validate_presence_of :uid }
+  it { should validate_presence_of :store_id }
   it { should validate_uniqueness_of :uid }
 
   describe "#confirmed?" do

@@ -17,3 +17,4 @@
 config/database.yml
 *.swp
 config/initializers/01_envvars.rb
+coverage

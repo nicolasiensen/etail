@@ -1,5 +1,6 @@
-class OrdersController < ApplicationController
+class OrdersController < InheritedResources::Base
   skip_before_filter :verify_authenticity_token
+  respond_to :csv, only: [:index]
 
   def confirm
     params = JSON.parse(request.body.read)

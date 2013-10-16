@@ -57,3 +57,5 @@ group :test do
 end
 
 gem 'coveralls', require: false
+gem 'inherited_resources'
+gem 'slim-rails'

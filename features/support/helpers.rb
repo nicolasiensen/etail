@@ -3,5 +3,5 @@ def to_url string
 end
 
 def to_content string
-  return "#{@order.created_at.strftime("%Y/%m/%d")}, #{@order.subtotal}" if string == "this order"
+  return "#{@order.created_at.strftime("%Y%m%d")},#{@order.subtotal}" if string == "this order"
 end

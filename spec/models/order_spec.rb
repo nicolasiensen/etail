@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Order do
   it { should validate_presence_of :subtotal }
-  it { should validate_presence_of :uid }
   it { should validate_presence_of :store_id }
-  it { should validate_uniqueness_of :uid }
+  it { should validate_presence_of :code }
+  it { should validate_uniqueness_of(:code).scoped_to(:store_id) }
 
   describe "#confirmed?" do
     context "when it was confirmed" do

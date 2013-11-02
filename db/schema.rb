@@ -11,25 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131015195839) do
+ActiveRecord::Schema.define(version: 20131015195218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "orders", force: true do |t|
     t.float    "subtotal"
-    t.datetime "received_at"
     t.datetime "confirmed_at"
-    t.datetime "canceled"
-    t.string   "uid"
+    t.datetime "canceled_at"
+    t.integer  "store_id"
+    t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "store_id"
   end
 
   create_table "stores", force: true do |t|
-    t.string   "uid"
     t.string   "name"
+    t.string   "token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

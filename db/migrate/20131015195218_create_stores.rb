@@ -1,8 +1,8 @@
 class CreateStores < ActiveRecord::Migration
   def change
     create_table :stores do |t|
-      t.string :uid
       t.string :name
+      t.string :token
 
       t.timestamps
     end

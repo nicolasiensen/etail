@@ -5,18 +5,18 @@ class OrdersController < InheritedResources::Base
   respond_to :csv, only: [:index]
   layout false
 
-  def confirm
-    params = JSON.parse(request.body.read)
-    order = Order.find_by_uid(params["uid"])
-    order.update_attributes confirmed_at: Time.now
-    render status: :ok, nothing: true
-  end
+  def receive
+    store = Store.find_by_token(params[:token])
 
-  def create
-    params = JSON.parse(request.body.read)
-    params["order"]["uid"] = params["order"]["id"]
-    params["order"]["store_id"] = Store.find_by_uid(params["order"]["store_id"]).id
-    Order.create(params["order"])
+    order_params = JSON.parse(request.body.read)
+    order = Order.find_by_code(order_params["code"])
+
+    if order.present?
+      order.update_attribute :confirmed_at, Time.now
+    else
+      Order.create! store: store, code: order_params["code"], subtotal: order_params["subtotal"]
+    end
+
     render status: :ok, nothing: true
   end
 
@@ -26,7 +26,7 @@ class OrdersController < InheritedResources::Base
         export = CSV.generate do |csv|
           csv << ["Date", "Revenue(R$)"]
           collection.each do |order|
-            csv << [order.received_at.strftime("%Y%m%d"), order.subtotal.to_s]
+            csv << [order.created_at.strftime("%Y%m%d"), order.subtotal.to_s]
           end
         end 
         render text: export

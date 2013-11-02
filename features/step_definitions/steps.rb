@@ -11,11 +11,11 @@ Given(/^there is an order for this store$/) do
 end
 
 When(/^I confirm this order$/) do
-  post confirm_order_path, {uid: @order.uid}.to_json
+  post receive_order_path(token: @order.store.token), {code: @order.code, status: "confirmed"}.to_json
 end
 
-When(/^I create an order uid "(.*?)" for this store$/) do |arg1|
-  @order = Order.make! uid: arg1, store: @store
+When(/^I create an order code "(.*?)" for this store$/) do |arg1|
+  post receive_order_path(token: @store.token), {code: arg1, status: "received", subtotal: "100.0"}.to_json
 end
 
 When(/^I go to "(.*?)"$/) do |arg1|
@@ -26,10 +26,10 @@ Then(/^this order should be confirmed$/) do
   @order.reload.should be_confirmed
 end
 
-Then(/^an order with uid "(.*?)" should be created$/) do |arg1|
-  Order.find_by_uid(arg1).should_not be_nil
-end
-
 Then(/^I should see "(.*?)"$/) do |arg1|
   page.should have_content(to_content(arg1))
+end
+
+Then(/^an order with code "(.*?)" should be created$/) do |arg1|
+  Order.find_by_code(arg1).should_not be_nil
 end

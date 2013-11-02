@@ -61,3 +61,4 @@ gem 'coveralls', require: false
 gem 'inherited_resources'
 gem 'slim-rails'
 gem 'rails_12factor'
+gem 'newrelic_rpm'

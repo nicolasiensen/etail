@@ -8,6 +8,7 @@ class OrdersController < InheritedResources::Base
   def receive
     store = Store.find_by_token(params[:token])
 
+    logger.info "Processing body: #{request.body.read}"
     order_params = JSON.parse(request.body.read)
     order = Order.find_by_code(order_params["code"])
 

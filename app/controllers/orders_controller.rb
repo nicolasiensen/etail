@@ -6,16 +6,14 @@ class OrdersController < InheritedResources::Base
   layout false
 
   def receive
+    logger.info params.inspect
     store = Store.find_by_token(params[:token])
-
-    logger.info "Processing body: #{request.body.read}"
-    order_params = JSON.parse(request.body.read)
-    order = Order.find_by_code(order_params["code"])
+    order = Order.find_by_code(params["code"])
 
     if order.present?
       order.update_attribute :confirmed_at, Time.now
     else
-      Order.create! store: store, code: order_params["code"], subtotal: order_params["subtotal"]
+      Order.create! store: store, code: params["code"], subtotal: params["subtotal"]
     end
 
     render status: :ok, nothing: true

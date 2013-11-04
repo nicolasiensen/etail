@@ -11,11 +11,17 @@ Given(/^there is an order for this store$/) do
 end
 
 When(/^I confirm this order$/) do
-  post receive_order_path(token: @order.store.token), {code: @order.code, status: "confirmed"}.to_json
+  Capybara.register_driver :custom_headers_driver do |app|
+    Capybara::RackTest::Driver.new(app, :headers => {'Content-Type' => 'application/json'})
+  end
+  post receive_order_path(token: @order.store.token, format: :json), body: {code: @order.code, status: "confirmed"}.to_json
 end
 
 When(/^I create an order code "(.*?)" for this store$/) do |arg1|
-  post receive_order_path(token: @store.token), {code: arg1, status: "received", subtotal: "100.0"}.to_json
+  Capybara.register_driver :custom_headers_driver do |app|
+    Capybara::RackTest::Driver.new(app, :headers => {'Content-Type' => 'application/json'})
+  end
+  post receive_order_path(token: @store.token, format: :json), body: {code: arg1, status: "received", subtotal: "100.0"}.to_json
 end
 
 When(/^I go to "(.*?)"$/) do |arg1|

@@ -24,7 +24,7 @@ class OrdersController < InheritedResources::Base
       format.csv do
         export = CSV.generate do |csv|
           csv << ["Date", "Revenue(R$)"]
-          collection.each do |order|
+          collection.order("date DESC").each do |order|
             csv << [order.created_at.strftime("%Y%m%d"), order.subtotal.to_s]
           end
         end 

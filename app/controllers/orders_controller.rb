@@ -6,9 +6,10 @@ class OrdersController < InheritedResources::Base
   layout false
 
   def receive
-    logger.info params.inspect
     store = Store.find_by_token(params[:token])
     order = Order.find_by_code(params["code"])
+    
+    logger.info "Receiving new order: store_id: #{store.id} | order_code: #{params["code"]}"
 
     if order.present?
       order.update_attribute :confirmed_at, Time.now

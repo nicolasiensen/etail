@@ -1,9 +1,10 @@
 require 'machinist/active_record'
 
 Order.blueprint do
-  store     { Store.make! }
-  subtotal  { rand(500) + 100 }
-  code      { sn }
+  store       { Store.make! }
+  subtotal    { rand(500) + 100 }
+  code        { sn }
+  received_at { Time.now }
 end
 
 Store.blueprint do

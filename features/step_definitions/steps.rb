@@ -14,14 +14,14 @@ When(/^I confirm this order$/) do
   Capybara.register_driver :custom_headers_driver do |app|
     Capybara::RackTest::Driver.new(app, :headers => {'Content-Type' => 'application/json'})
   end
-  post receive_order_path(token: @order.store.token, format: :json, code: @order.code, status: "confirmed")
+  post receive_order_path(token: @order.store.token, format: :json, code: @order.code, status: "confirmed", confirmed_at: Time.now)
 end
 
 When(/^I create an order code "(.*?)" for this store$/) do |arg1|
   Capybara.register_driver :custom_headers_driver do |app|
     Capybara::RackTest::Driver.new(app, :headers => {'Content-Type' => 'application/json'})
   end
-  post receive_order_path(token: @store.token, format: :json, code: arg1, status: "received", subtotal: "100.0")
+  post receive_order_path(token: @store.token, format: :json, code: arg1, status: "received", subtotal: "100.0", received_at: Time.now)
 end
 
 When(/^I go to "(.*?)"$/) do |arg1|

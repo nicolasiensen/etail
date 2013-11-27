@@ -9,12 +9,16 @@ class OrdersController < InheritedResources::Base
     store = Store.find_by_token(params[:token])
     order = Order.find_by_code(params["code"])
     
-    logger.info "Receiving new order: store_id: #{store.id} | order_code: #{params["code"]}"
-
     if order.present?
-      order.update_attribute :confirmed_at, Time.now
+      order.update_attribute :confirmed_at, Time.parse(params["confirmed_at"])
     else
-      Order.create! store: store, code: params["code"], subtotal: params["subtotal"]
+      Order.create!(
+        store:        store, 
+        code:         params["code"], 
+        subtotal:     params["subtotal"], 
+        received_at:  Time.parse(params["received_at"]), 
+        confirmed_at: params["confirmed_at"].present? ? Time.parse(params["confirmed_at"]) : nil
+      )
     end
 
     render status: :ok, nothing: true

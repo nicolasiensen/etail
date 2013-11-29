@@ -10,7 +10,7 @@ class OrdersController < InheritedResources::Base
     order = Order.find_by_code(params["code"])
     
     if order.present?
-      order.update_attribute :confirmed_at, Time.parse(params["confirmed_at"])
+      order.update_attributes! confirmed_at: Time.parse(params["confirmed_at"])
     else
       Order.create!(
         store:        store, 

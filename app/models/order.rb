@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-  validates :subtotal, :store_id, :code, :received_at, presence: true
+  validates :subtotal, :store_id, :code, :received_at, :total, presence: true
   validates :code, uniqueness: {scope: :store_id}
 
   belongs_to :store

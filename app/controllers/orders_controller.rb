@@ -16,6 +16,7 @@ class OrdersController < InheritedResources::Base
         store:        store, 
         code:         params["code"], 
         subtotal:     params["subtotal"], 
+        total:        params["total"], 
         received_at:  Time.parse(params["received_at"]), 
         confirmed_at: params["confirmed_at"].present? ? Time.parse(params["confirmed_at"]) : nil
       )

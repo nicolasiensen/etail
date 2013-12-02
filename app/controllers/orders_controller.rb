@@ -31,7 +31,7 @@ class OrdersController < InheritedResources::Base
         export = CSV.generate do |csv|
           csv << ["Date", "Revenue(R$)"]
           Order.revenue.each do |revenue|
-            csv << [revenue["day"], revenue["subtotal"]]
+            csv << [revenue["day"], revenue["total"]]
           end
         end 
         render text: export

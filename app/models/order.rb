@@ -9,6 +9,6 @@ class Order < ActiveRecord::Base
   end
 
   def self.revenue
-    ActiveRecord::Base.connection.execute("SELECT to_char(orders.received_at, 'yyyymmdd') AS \"day\", sum(orders.total) AS \"total\" FROM orders GROUP BY 1 ORDER BY 1 DESC")
+    ActiveRecord::Base.connection.execute("SELECT to_char(orders.received_at at time zone 'America/Sao_Paulo', 'yyyymmdd') AS \"day\", sum(orders.total) AS \"total\" FROM orders GROUP BY 1 ORDER BY 1 DESC")
   end
 end
